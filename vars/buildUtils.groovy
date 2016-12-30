@@ -1,15 +1,9 @@
 #!groovy
 
-def call(body) {
-
-    def config = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = config
-    body()
-
+def call(name) {
     node('linux') {
         checkout scm
-        def url = "https://github.com/jenkinsci/${config.name}-plugin.git"
+        def url = "https://github.com/jenkinsci/${name}-plugin.git"
         echo " == URL with repo name == "
         echo "${url}"
     }
