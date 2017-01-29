@@ -2,8 +2,8 @@
 
 #### Pre-requisites
 
-- Install consul key value builder plugin that's available (here) [https://plugins.jenkins.io/consul-kv-builder]
-- Active Consul agent(s), follow the instructions (here) [https://www.consul.io/intro/getting-started/join.html] to setup a basic Consul cluster
+- Install consul key value builder plugin that's available [here] (https://plugins.jenkins.io/consul-kv-builder)
+- Active Consul agent(s), follow the instructions [here] (https://www.consul.io/intro/getting-started/join.html) to setup a basic Consul cluster
 - Setup Jenkins' configuration with Consul's Host URL, Test URI
 - From the Consul UI, create test key named, "sentinel" with value "canary"
  * If you choose to create different key-value pair, adjust this Groovy library accordingly
