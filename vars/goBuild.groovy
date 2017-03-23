@@ -18,7 +18,7 @@ def call(body) {
     }
     stage('Go Build') {
       docker.image(config.environment).inside {
-        sh "config.goBuild"
+        sh config.buildScript
       }
     }
   }
