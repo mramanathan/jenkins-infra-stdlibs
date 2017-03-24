@@ -11,6 +11,10 @@ def call(body) {
 
   node('docker') {
     stage('Build and Record') {
+
+      deleteDir()
+      checkout scm
+
       docker.image(config.environment).inside {
         // Take note: shell step args is not enclosed in ' or "
         sh config.buildScript
