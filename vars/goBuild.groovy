@@ -22,7 +22,7 @@ def call(body) {
       }
     }
     stage('Record Result') {
-      if (fileExists('hello') {
+      if (fileExists('hello')) {
         writeFile file: "buildresult.txt", text: "PASS"
       } else {
         writeFile file: "buildresult.txt", text: "FAIL"
