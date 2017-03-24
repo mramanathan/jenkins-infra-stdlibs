@@ -20,13 +20,13 @@ def call(body) {
       docker.image(config.environment).inside {
         // Take note: shell step args is not enclosed in ' or "
         sh config.buildScript
-      }
-    }
-    stage('Record Result') {
-      if (fileExists('hello')) {
-        writeFile file: "${config.wsdir}/buildresult.txt", text: "PASS"
-      } else {
-        writeFile file: "${config.wsdir}/buildresult.txt", text: "FAIL"
+        // https://jenkins.io/doc/pipeline/steps/docker-workflow/#code-withdockercontainer-code-run-build-steps-inside-a-docker-container
+        // all nested sh steps should run inside that container b'cos the workspace is mounted read-write into the container.
+        if ( fileExists('hello') ) {
+          writeFile file: "buildresult.txt", text: "PASS"
+        } else {
+          writeFile file: "buildresult.txt", text: "FAIL"
+        }
       }
     }
   }
