@@ -18,14 +18,15 @@ def call(body) {
     }
     stage('Go Build') {
       docker.image(config.environment).inside {
+        // Take note: shell step args is not enclosed in ' or "
         sh config.buildScript
       }
     }
     stage('Record Result') {
       if (fileExists('hello')) {
-        writeFile file: "buildresult.txt", text: "PASS"
+        writeFile file: "${config.wsdir}/buildresult.txt", text: "PASS"
       } else {
-        writeFile file: "buildresult.txt", text: "FAIL"
+        writeFile file: "${config.wsdir}/buildresult.txt", text: "FAIL"
       }
     }
   }
