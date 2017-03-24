@@ -17,9 +17,12 @@ def call(body) {
         // https://jenkins.io/doc/pipeline/steps/docker-workflow/#code-withdockercontainer-code-run-build-steps-inside-a-docker-container
         // all nested sh steps should run inside that container b'cos the workspace is mounted read-write into the container.
         if ( fileExists('hello') ) {
-          writeFile file: "buildresult.txt", text: "PASS"
+          // writeFile file: "buildresult.txt", text: "PASS"
+          println "Go build passed !"
+          currentBuild.result = "SUCCESS"
         } else {
-          writeFile file: "buildresult.txt", text: "FAIL"
+          println "Go build failed !"
+          currentBuild.result = "FAILURE"
         }
       }
     }
