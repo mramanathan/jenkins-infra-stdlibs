@@ -10,13 +10,7 @@ def call(body) {
   body()
 
   node('docker') {
-    stage('Preparation...') {
-      deleteDir()
-    }
-    stage('SCM') {
-      checkout scm
-    }
-    stage('Go Build') {
+    stage('Build and Record') {
       docker.image(config.environment).inside {
         // Take note: shell step args is not enclosed in ' or "
         sh config.buildScript
