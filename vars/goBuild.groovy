@@ -21,5 +21,12 @@ def call(body) {
         sh config.buildScript
       }
     }
+    stage('Record Result') {
+      if (fileExists('hello') {
+        writeFile file: "buildresult.txt", text: "PASS"
+      } else {
+        writeFile file: "buildresult.txt", text: "FAIL"
+      }
+    }
   }
 }
