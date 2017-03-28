@@ -10,5 +10,8 @@ def call(body) {
   body()
 
   sh "cd ${config.wsdir}"
-  sh "git config remote.origin.url"
+  def origin_name = sh '''
+                       git rev-parse --abbrev-ref --symbolic-full-name env.BRANCH_NAME@{u} | sed -F'\/' '{print $1}'
+                    '''
+  sh "git config remote.${origin_name}.url"
 }
