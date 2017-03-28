@@ -32,6 +32,9 @@ def call(body) {
 
   if ( tagStatus == 0 ) { 
     echo "Gitlib :~> Pushing ${config.tagname} to ${origin_name}..."
+    // push shall fail for want of username and password to authenticate to github repo
+    // fatal: could not read Username for 'https://github.com': No such device or address
+    // SOLUTION: git url should be embedded with username and password using "withCredentials"
     sh "git push --tags --progress ${remote_url} ${config.tagname}"
   } else {
     echo "Gitlib :~> Git tagging failed, nothing to push to the remote"
