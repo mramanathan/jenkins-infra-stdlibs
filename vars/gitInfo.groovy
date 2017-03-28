@@ -10,8 +10,10 @@ def call(body) {
   body()
 
   sh "cd ${config.wsdir}"
+  def branch_name = env.BRANCH_NAME
   def origin_name = sh '''
-                       git rev-parse --abbrev-ref --symbolic-full-name env.BRANCH_NAME@{u} | sed -F'\/' '{print $1}'
+                       git rev-parse --abbrev-ref --symbolic-full-name ${branch_name}@{u} | awk -F'/' '{print $1}'
                     '''
+  echo "${origin_name} is the remote for the branch, ${branch_name} and it's remote url is, "
   sh "git config remote.${origin_name}.url"
 }
