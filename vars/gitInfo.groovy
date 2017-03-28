@@ -23,7 +23,7 @@ def call(body) {
   sh "git config user.email rus.cahimb@gmail.com"
   sh "git config user.name mramanathan"
 
-  tagStatus = sh(script: "git tag -fa ${config.tagname} -m 'Git workflow library tag, ${config.tagname}'", returnStdout: true).trim()
+  tagStatus = sh(script: "git tag -fa ${config.tagname} -m 'Git workflow library tag, ${config.tagname}'", returnStatus: true)
   println "~> Status of git tagging: "
   println "${tagStatus}"
 
