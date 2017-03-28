@@ -10,7 +10,8 @@ def call(body) {
   body()
 
   sh "cd ${config.wsdir}"
-  def branch_name = env.BRANCH_NAME
+  // why isn't env.BRANCH_NAME working!!! ?
+  def branch_name = sh(returnStdout: true, script: "git rev-parse --abbrev-ref HEAD").trim()
   def origin_name = sh '''
                        git rev-parse --abbrev-ref --symbolic-full-name ${branch_name}@{u} | awk -F'/' '{print $1}'
                     '''
