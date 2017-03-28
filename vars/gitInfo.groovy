@@ -23,9 +23,15 @@ def call(body) {
   sh "git config user.email rus.cahimb@gmail.com"
   sh "git config user.name mramanathan"
 
-  tagOut = sh(script: "git tag -fa ${config.tagname} -m 'Git workflow library tag, ${config.tagname}'", returnStdout: true).trim()
-  println "~> Output of git tag: "
-  println tagOut
+  tagStatus = sh(script: "git tag -fa ${config.tagname} -m 'Git workflow library tag, ${config.tagname}'", returnStdout: true).trim()
+  println "~> Status of git tagging: "
+  println "${tagStatus}"
 
-  sh "git push --tags --progress ${origin_name} ${config.tag_name}"
+  if ( tagStatus == 0 ) { 
+    echo "Pushing ${config.tagname} to ${origin_name}..."
+    sh "git push --tags --progress ${origin_name} ${config.tagname}"
+  } else {
+    echo "Git tagging failed, nothing to push to the remote"
+  }
+
 }
