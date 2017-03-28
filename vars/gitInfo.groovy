@@ -19,7 +19,11 @@ def call(body) {
   echo "${origin_name} is the remote for the branch, ${branch_name} and it's remote url is, "
   sh "git config remote.${origin_name}.url"
 
-  tagOut = sh(script: "git tag -fa ${config.tag_name} -m 'Git workflow library tag, ${config.tag_name}'", returnStdout: true).trim()
+  // preparation for env for git operations...
+  sh "git config user.email rus.cahimb@gmail.com"
+  sh "git config user.name mramanathan"
+
+  tagOut = sh(script: "git tag -fa ${config.tagname} -m 'Git workflow library tag, ${config.tagname}'", returnStdout: true).trim()
   println "~> Output of git tag: "
   println tagOut
 
