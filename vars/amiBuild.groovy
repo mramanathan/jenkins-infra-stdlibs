@@ -8,4 +8,9 @@ def call(body) {
         config.is_pr = env.BRANCH_NAME != null && env.BRANCH_NAME != "master"
     }
 
+    builder(config)
+}
+
+def builder(config) {
+    brancher(config)
 }
