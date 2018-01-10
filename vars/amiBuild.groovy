@@ -8,13 +8,4 @@ def call(body) {
         config.is_pr = env.BRANCH_NAME != null && env.BRANCH_NAME != "master"
     }
 
-    try {
-        run(config)
-    } catch (Exception rethrow) {
-        throw rethrow
-    }
-}
-
-def run(config) {
-    process(config)
 }
