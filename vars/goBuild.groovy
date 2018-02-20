@@ -38,5 +38,10 @@ def call(body) {
             }
         }
     }
+    post {
+        always {
+            cleanWs()
+        }
+    }
   }
 }
