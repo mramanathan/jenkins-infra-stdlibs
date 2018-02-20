@@ -12,7 +12,7 @@ def call(body) {
     node('master') {
         stage('Prep') {
             stepgitPrep(config)
-            // stepBuild(config)
+            stepBuild(config)
         }
     }
 }
