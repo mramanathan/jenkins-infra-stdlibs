@@ -9,31 +9,10 @@ def call(body) {
     body.delegate = config
     body()
 
-    pipeline {
-        agent none
-
-        options {
-            timestamps()
-            skipDefaultCheckout()
-        }
-
-        stages {
-            stage('Prep') {
-                steps {
-                    script {
-                        // CAUTION: do _NOT_ run this code in 'master' meant for production!!!
-                        if ( config.machine ?: 'master') {
-                            stepgitPrep(config)
-                            stepBuild(config)
-                        }
-                    }
-                }
-            }
-        }
-        post {
-            always {
-                cleanWs()
-            }
+    node('master') {
+        stage('Prep') {
+            stepgitPrep(config)
+            // stepBuild(config)
         }
     }
 }
