@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
-def call(config) {
-    node("master") {
+def call() {
+    node("ubuntu") {
         stage('Git-Prep') {
             dir("${WORKSPACE}") {
                 deleteDir()

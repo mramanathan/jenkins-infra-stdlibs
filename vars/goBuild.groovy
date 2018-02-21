@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 
+
 def call(body) {
     // The call(bo
     // method with the same name as the file.
@@ -10,7 +11,7 @@ def call(body) {
     body()
 
     pipeline {
-        agent any
+        agent none
 
         options {
             timestamps()
@@ -19,9 +20,13 @@ def call(body) {
 
         stages {
             stage('Prep') {
+                agent {
+                    label 'ubuntu'
+                }
+
                 steps {
                     script {
-                        stepgitPrep(config)
+                        stepgitPrep()
                         stepBuild(config)
                     }
                 }
@@ -29,7 +34,9 @@ def call(body) {
         }
         post{
             always {
-                cleanWs()
+                node('ubuntu') {
+                    cleanWs()
+                }
             }
         }
     }

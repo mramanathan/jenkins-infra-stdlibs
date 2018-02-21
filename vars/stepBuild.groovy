@@ -2,7 +2,7 @@
 
 
 def call(config) {
-    node("master") {
+    node("ubuntu") {
         stage('gobuild') {
             dir("${WORKSPACE}/jenkins_pipeline_demo") { //Go code is in here...
                 docker.image(config.environment).inside {
