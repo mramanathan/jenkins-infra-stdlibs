@@ -26,7 +26,6 @@ def call(body) {
 
                 steps {
                     script {
-                        stepgitPrep()
                         stepBuild(config)
                     }
                 }

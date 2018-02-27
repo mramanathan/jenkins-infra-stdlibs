@@ -2,6 +2,9 @@
 
 
 def call(config) {
+    if ( config.reponame == null ) {
+            stepgitPrep()
+    }
     node("ubuntu") {
         stage('gobuild') {
             dir("${WORKSPACE}/jenkins_pipeline_demo") { //Go code is in here...
